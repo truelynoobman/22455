@@ -1,0 +1,46 @@
+coordmode, Relative
+stop = 0
+stop:=!stop
+sleep, 100
+Loop{
+	if stop = 0
+	{
+	ImageSearch, upX, upY, 0, A_ScreenHeight/2, A_ScreenWidth, A_ScreenHeight, *50 up.png
+	if ErrorLevel = 0
+	{
+		send, {UP}
+	}
+	else
+	{
+		if ErrorLevel = 1
+		{
+			ImageSearch, rightX, rightY, 0, A_ScreenHeight/2, A_ScreenWidth, A_ScreenHeight, *50 right.png
+			if ErrorLevel = 0
+			{
+				Send, {RIGHT}
+			}
+			else
+			{
+				if ErrorLevel = 1
+				{
+					ImageSearch, downX, downY, 0, A_ScreenHeight/2, A_ScreenWidth, A_ScreenHeight, *50 down.png
+					if ErrorLevel = 0
+					{
+						Send, {DOWN}
+					}
+					else
+					{
+						ImageSearch, leftX, leftY, 0, A_ScreenHeight/2, A_ScreenWidth, A_ScreenHeight, *50 left.png
+						if ErrorLevel = 0
+						{
+							Send, {LEFT}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+}
+^Up::stop:=!stop
+Esc:: ExitApp
